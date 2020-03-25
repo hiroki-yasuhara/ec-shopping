@@ -6,4 +6,6 @@ class User < ApplicationRecord
     validates :bank,  presence: true, length: { maximum:20 }
     
     has_secure_password
+    
+    has_many :items
 end
