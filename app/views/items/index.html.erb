@@ -10,6 +10,9 @@
       <div class="media-body">
           <p><%= f.name %></p>
       </div>
+      <div>
+        <%= link_to '商品詳細', f,class: 'btn btn-light' %>
+      </div>
     </li>
   <% end %>
   <%= paginate @items %>
