@@ -4,6 +4,8 @@ class ShopsController < ApplicationController
     @items = Item.page(params[:page]).per(25)
   end
   
+  def search
+  end
 
   def create
   end
