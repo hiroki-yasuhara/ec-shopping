@@ -54,10 +54,12 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name,:price,:category_id,:content,:image)
   end  
   
+
+  
   def correct_user
     @item = current_user.items.find_by(id: params[:id])
     unless @item
-      redirect_to items_path
+    redirect_to items_path
     end
   end
 end
