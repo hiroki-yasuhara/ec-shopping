@@ -12,4 +12,7 @@ class Item < ApplicationRecord
   end
   scope :name_like, -> (name) { where('name LIKE ?', "%#{name}%") if name.present? }
   #scope :cotegory_like, -> (cotegory_id) { where('cotegory LIKE ?', "%#{cotegory_id}%") if cotegory_id.present? }
+  
+  has_many :user_items
+  has_many :buyers, through: :user_items, source: :user
 end

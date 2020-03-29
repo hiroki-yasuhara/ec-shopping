@@ -28,7 +28,9 @@
       <li class="media mb-3">
         <img class="mr-2 rounded" src="<%= f.image %>" width="50" alt="">
         <div class="media-body">
-            <p><%= f.name %></p>
+            <p>商品名：<%= f.name %></p>
+            <p>価格：<%= f.price %></p>
+            <p>説明：<%= f.content %></p>
         </div>
         <div>
           <%= link_to '商品詳細', f,class: 'btn btn-light' %>
