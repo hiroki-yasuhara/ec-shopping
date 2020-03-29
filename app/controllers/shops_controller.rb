@@ -13,7 +13,12 @@ class ShopsController < ApplicationController
   end
 
   def create
+    item = Item.find(params[:id])
+    current_user.buy(item)
+    flush[:success] = '商品の購入を確定しました。振り込み確後、商品を発送します。'
+    render "shops/result"
   end
+  
   
   def user_search_params
     params.fetch(:search, {}).permit(:name ,:cotegory_id)
