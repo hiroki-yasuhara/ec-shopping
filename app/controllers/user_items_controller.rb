@@ -1,6 +1,18 @@
 class UserItemsController < ApplicationController
-    
+
     def create
+        
+      item = Item.find(params[:item_id])
+      @user_item = current_user.shop(item)
+      @user_item.quantity = params[:user_item][:quantity]
+
+        @user_item.save
+          flash[:success] = '商品の購入を確定しました。振り込み確認後、商品を発送します。。'
+          redirect_to @user_item
+       # else
+       #   flash.now[:danger] = 'ユーザの登録に失敗しました。'
+       #   render root_url
+       # end
     end
     
     def show
@@ -11,5 +23,12 @@ class UserItemsController < ApplicationController
     end
     
     def index
+        @user_items = current_user.user_items.page(params[:page]).per(25)
+    end
+    
+    private 
+    def user_item_params
+      params.require(:user_item).permit(:user_id,:item_id) 
+      #params.require(:user_item).permit(:user_id,:item_id,:quantity) 
     end
 end

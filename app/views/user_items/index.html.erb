@@ -1,0 +1,29 @@
+<h1>購入履歴画面</h1>
+
+<div class="mt-3">
+  <ul class="list-unstyled">
+    <% sum = 0 %>
+    <% @user_items.each do |user_item| %>
+      <li class="media mb-3">
+        <img class="mr-2 rounded" src="<%= user_item.item.image %>" width="50" alt="">
+          <div class="media-body ">
+            <div>
+            <p>商品名：<%= user_item.item.name %></p>
+            <p>数量：<%= user_item.quantity %></p>
+            <p>価格：<%= user_item.item.price %></p>
+            </div>
+          <div>
+             <% sum_price = (user_item.quantity.to_i)*(user_item.item.price.to_i) %>
+            <p>合計額：<%= sum_price %></p> 
+          </div>
+        </div>
+        <% sum = sum + sum_price %>
+      </li>
+    <% end %>
+    <h2>購入合計額:<%= sum %></h2>
+    <%= paginate @user_items %>
+  </ul>
+</div>
+
+
+

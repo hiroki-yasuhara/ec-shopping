@@ -1,0 +1,36 @@
+<h1>商品購入結果</h1>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="form-group">
+        <img class="mr-2 rounded" src="<%= @item.image %>" width="200" alt="">
+    </div>
+  </div>
+
+<div class="col-sm-9">
+<table class="table table-bordered">
+    <tr>
+        <th>商品名</th>
+        <td><%= @user_item.item.name %></td>
+    </tr>
+    <tr>
+        <th>価格</th>
+        <td><%= @user_item.item.price %></td>
+    </tr>
+    <tr>
+        <th>数量</th>
+        <td><%= @user_item.quantity %></td>
+    </tr>
+    <tr>
+        <th>合計金額</th>
+        <% all = @user_item.quantity.to_i * @user_item.item.price.to_i %>
+        <td><%= all %></td>
+    </tr>
+    <tr>
+        <th>振込先</th>
+        <td><%= @user_item.user.bank %></td>
+    </tr>
+</table>
+
+<%=link_to '購入履歴へ',user_items_path, method: :get,class: 'btn btn-light'%>
+
+</div>

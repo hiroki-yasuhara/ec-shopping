@@ -10,4 +10,10 @@ class User < ApplicationRecord
     has_many :items
     has_many :user_items
     has_many :buys, through: :user_items, source: :item
+    
+    
+    def shop(shop_item)
+     self.user_items.create(item_id: shop_item.id)
+
+    end
 end

@@ -1,5 +1,5 @@
 <h1>商品購入画面</h1>
-
+<%=link_to '購入履歴へ',user_items_path, method: :get,class: 'btn btn-light'%>
 <div class="row">
   <div class="col-sm-3">
     <table class="table table-bordered">
@@ -34,9 +34,12 @@
         </div>
         <%= form_with(model: current_user.user_items.build, local:true)do |f| %>
                 <%= hidden_field_tag :item_id, item.id %>
+          <!--       
+               <%= hidden_field_tag :user_id, current_user.id %>
+           -->
                 <%= f.number_field :quantity, min:1,max:10000,step:1 %>
-                <%= f.submit '購入', class: 'btn-primary btn-block btn-sm' %>
-              <% end %>
+                <%= f.submit '購入', data: { confirm: "You sure?" }, class: 'btn-primary btn-block btn-sm' %>
+        <% end %>
         <div>
           
         </div>
