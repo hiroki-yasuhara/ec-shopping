@@ -7,7 +7,8 @@ class UserItemsController < ApplicationController
       @user_item.quantity = params[:user_item][:quantity]
 
         @user_item.save
-          flash[:success] = '商品の購入を確定しました。振り込み確認後、商品を発送します。。'
+          flash[:success] = '商品の購入を確定しました。振り込み確認後、商品を発送します。'
+          ContactMailer.send_when_admin_reply(@user_item).deliver
           redirect_to @user_item
        # else
        #   flash.now[:danger] = 'ユーザの登録に失敗しました。'
