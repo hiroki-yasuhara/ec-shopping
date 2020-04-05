@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  def new
-  end
 
   def create
     email = params[:session][:email].downcase
@@ -16,6 +14,9 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:name] = nil
+    session[:category] = nil
+    session[:category_id] = nil
     flash[:success] = 'ログアウトしました。'
     redirect_to root_url
   end

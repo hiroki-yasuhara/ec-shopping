@@ -5,8 +5,7 @@
   <div class="col-sm-3 mt-5">
     <table class="table table-bordered">
       <tr>
-       <!-- <td><%= link_to '全てのカテゴリ' ,shops_path %></td> -->
-       <td><%= link_to '全てのカテゴリ' ,category_path(id: 999), method: :post %></td>
+        <td><%= link_to '全てのカテゴリ' ,category_path(id: 999), method: :post %></td>
       </tr>
       <% category_all.each do |f| %>
       <tr>
@@ -15,52 +14,43 @@
       <% end %>
     </table>
   </div>
-<div class="col-sm-9">
-<div>
-  <%= form_with(scope: :search, url: search_path, method: :get, local: true) do |f| %>
-    <%= f.label(:name,'商品名検索') %>
-    <%= f.text_field :name,:value =>session[:name] %>
-    <%= f.hidden_field :category_id ,:value =>session[:category_id]%>
-    <%= f.submit('検索') %>
-    
-  <% end %>
-  カテゴリ：
-  <% if session[:category] %>
-    <%= session[:category] %>
-  <% else%>
-    全てのカテゴリ
-  <%end%>
-    
-</div>
-
-<div class="mt-3">
-  <ul class="list-unstyled">
-    <% @items.each do |item| %>
-      <li class="media mb-3 border-bottom">
-        <img class="mr-2 rounded" src="<%= item.image %>" width="100" alt="">
-        <div class="media-body">
-            <p>商品名：<%= item.name %></p>
-            <p>価格：<%= item.price %></p>
-            <p>説明：<%= item.content %></p>
-        </div>
-        <%= form_with(model: current_user.user_items.build, local:true)do |f| %>
-        <%= render 'layouts/error_messages', model: f.object %>
-                <%= hidden_field_tag :item_id, item.id %>
-          <!--       
-               <%= hidden_field_tag :user_id, current_user.id %>
-           -->
-                <%= f.number_field :quantity, min:1,max:10000,step:1 %>
-                <%= f.submit '購入', data: { confirm: "購入を確定させますか?" }, class: 'btn-primary btn-block btn-sm' %>
+  <div class="col-sm-9">
+    <div>
+      <%= form_with(scope: :search, url: search_path, method: :get, local: true) do |f| %>
+        <%= f.label(:name,'商品名検索') %>
+        <%= f.text_field :name,:value =>session[:name] %>
+        <%= f.hidden_field :category_id ,:value =>session[:category_id]%>
+        <%= f.submit('検索') %>
+      <% end %>
+      カテゴリ：
+      <% if session[:category] %>
+        <%= session[:category] %>
+      <% else%>
+        全てのカテゴリ
+      <%end%>
+    </div>
+    <div class="mt-3">
+      <ul class="list-unstyled">
+        <% @items.each do |item| %>
+          <li class="media mb-3 border-bottom">
+            <img class="mr-2 rounded" src="<%= item.image %>" width="100" alt="">
+            <div class="media-body">
+              <p>商品名：<%= item.name %></p>
+              <p>価格：<%= item.price %></p>
+              <p>説明：<%= item.content %></p>
+            </div>
+            <%= form_with(model: current_user.user_items.build, local:true)do |f| %>
+              <%= render 'layouts/error_messages', model: f.object %>
+              <%= hidden_field_tag :item_id, item.id %>
+              <%= f.number_field :quantity, min:1,max:10000,step:1 %>
+              <%= f.submit '購入', data: { confirm: "購入を確定させますか?" }, class: 'btn-primary btn-block btn-sm' %>
+            <% end %>
+          </li>
         <% end %>
-        <div>
-          
-        </div>
-      </li>
-    <% end %>
-    <%= paginate @items %>
-  </ul>
-</div>
-</div>
+        <%= paginate @items %>
+      </ul>
+    </div>
+  </div>
 </div>
 
 

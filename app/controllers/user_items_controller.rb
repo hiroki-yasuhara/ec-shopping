@@ -1,7 +1,6 @@
 class UserItemsController < ApplicationController
-
+  before_action :require_user_logged_in
     def create
-        
       item = Item.find(params[:item_id])
       @user_item = current_user.shop(item)
       @user_item.quantity = params[:user_item][:quantity]
@@ -31,6 +30,5 @@ class UserItemsController < ApplicationController
     private 
     def user_item_params
       params.require(:user_item).permit(:user_id,:item_id) 
-      #params.require(:user_item).permit(:user_id,:item_id,:quantity) 
     end
 end

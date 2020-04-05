@@ -32,7 +32,6 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-
     if @item.update(items_params)
       flash[:success] = '商品情報は正常に更新されました'
       redirect_to @item
