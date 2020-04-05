@@ -60,3 +60,7 @@ gem 'pry-byebug', group: :development
 # for image uploader with AWS S3
 gem 'carrierwave'
 gem 'fog-aws'
+
+group :production do
+  gem 'pg', '>= 0.18', '< 2.0'
+end
