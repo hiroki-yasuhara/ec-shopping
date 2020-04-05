@@ -10,7 +10,7 @@ class UserItemsController < ApplicationController
           ContactMailer.send_when_admin_reply(@user_item).deliver
           redirect_to @user_item
         else
-          flash[:danger] = 'ユーザの登録に失敗しました。'
+          flash[:danger] = '商品の登録に失敗しました。'
           redirect_back(fallback_location: root_path)
         end
     end
