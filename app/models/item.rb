@@ -6,12 +6,10 @@ class Item < ApplicationRecord
   
   scope :search, -> (search_params) do
     return if search_params.blank?
-    
-    #name_like(search_params[:name]).cotegory_like(search_params[:cotegory_id])
-    name_like(search_params[:name])
+    name_like(search_params[:name]).category_id(search_params[:category_id])
   end
   scope :name_like, -> (name) { where('name LIKE ?', "%#{name}%") if name.present? }
-  #scope :cotegory_like, -> (cotegory_id) { where('cotegory LIKE ?', "%#{cotegory_id}%") if cotegory_id.present? }
+  scope :category_id, -> (category_id) { where(category_id: category_id) if category_id.present? }
   
   has_many :user_items
   has_many :buyers, through: :user_items, source: :user

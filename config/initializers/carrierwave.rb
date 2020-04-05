@@ -4,10 +4,9 @@ unless Rails.env.development? || Rails.env.test?
       provider: 'AWS',
       aws_access_key_id: 'AKIA5KM6ZOJJFCFEFCFT',
       aws_secret_access_key: '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',
-      region: 'ap-northeast-1'
+      region: 'ap-northeast-1',
     }
-
-    config.fog_directory  = 'rails-image-hiroki'
-    config.cache_storage = :fog
+     config.fog_directory  = 'rails-image-hiroki'
+     config.cache_storage = :fog
   end
 end

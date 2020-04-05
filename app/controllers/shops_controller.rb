@@ -1,14 +1,31 @@
 class ShopsController < ApplicationController
   before_action :require_user_logged_in
   def index
-   # @items = Item.page(params[:page]).per(25)
-   
+     session[:category] = nil
+     session[:category_id] = nil
+     session[:name] = nil
+    @items = Item.page(params[:page]).per(25)
+
+  end
+  
+  def search
+    session[:name] = params[:search][:name]
     @search_params = user_search_params
     @items =Item.search(@search_params).page(params[:page]).per(25)
+    render "shops/index"
   end
   
   def category
-    @items =Item.where(category_id: params[:id]).page(params[:page]).per(25)
+    session[:name] = nil
+    if params[:id] != '999'
+     category = Category.find(params[:id])
+      session[:category] = category.category
+      session[:category_id] = params[:id]
+      @items =Item.where(category_id: params[:id]).page(params[:page]).per(25)
+    else
+      session[:category] = nil
+      @items = Item.page(params[:page]).per(25)
+    end
     render "shops/index"
   end
 
@@ -21,6 +38,6 @@ class ShopsController < ApplicationController
   
   
   def user_search_params
-    params.fetch(:search, {}).permit(:name ,:cotegory_id)
+    params.fetch(:search, {}).permit(:name,:category_id )
   end
 end
