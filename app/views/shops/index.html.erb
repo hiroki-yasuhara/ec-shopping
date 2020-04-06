@@ -9,7 +9,7 @@
       </tr>
       <% category_all.each do |f| %>
       <tr>
-        <td><%= link_to f.category ,category_path(id: f.id), method: :post %></td>
+        <td><%= link_to f.category ,category_path(id: f.id) %></td>
       </tr>
       <% end %>
     </table>

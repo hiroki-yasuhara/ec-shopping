@@ -13,5 +13,10 @@
  *= require_tree .
  *= require_self
  */
+.top{
+width:100%;
+max-width: 100%;
+height: auto;
+}
 
 

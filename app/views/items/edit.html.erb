@@ -1,13 +1,13 @@
 <%= form_with(model: @item, local: true,method: :put,) do |f| %>
 <div class="row">
-  <aside class="col-sm-4">
+  <aside class="col-sm-12 col-md-4">
     <div class="form-group">
       <img class="mr-2 rounded" src="<%= @item.image %>" width="200" alt="">
       <%= f.file_field :image %>
     </div>
   </aside>
 
-  <div class="col-sm-8">
+  <div class="col-sm-12 col-md-8">
     <div class="form-group">
       <%= f.label :name, '商品名' %>
       <%= f.text_field :name, class: 'form-control' %>
