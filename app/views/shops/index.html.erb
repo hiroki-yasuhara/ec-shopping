@@ -5,7 +5,7 @@
   <div class="col-sm-3 mt-5">
     <table class="table table-bordered">
       <tr>
-        <td><%= link_to '全てのカテゴリ' ,category_path(id: 999), method: :post %></td>
+        <td><%= link_to '全てのカテゴリ' ,category_path(id: 999) %></td>
       </tr>
       <% category_all.each do |f| %>
       <tr>
@@ -22,11 +22,11 @@
         <%= f.hidden_field :category_id ,:value =>session[:category_id]%>
         <%= f.submit('検索') %>
       <% end %>
-      カテゴリ：
+      <h4><span class="badge badge-info">カテゴリ：
       <% if session[:category] %>
-        <%= session[:category] %>
+        <%= session[:category] %></span></h4>
       <% else%>
-        全てのカテゴリ
+        全てのカテゴリ</span></h4>
       <%end%>
     </div>
     <div class="mt-3">
