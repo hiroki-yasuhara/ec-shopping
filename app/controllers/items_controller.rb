@@ -21,11 +21,7 @@ class ItemsController < ApplicationController
       redirect_to items_path
     else
       flash.now[:danger] = '商品の登録に失敗しました。'
-      if params[:id]=nil
-        render 'items/new'
-      else
-        render 'items/edit'
-      end
+        render :new
     end
   end
 
