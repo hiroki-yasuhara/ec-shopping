@@ -5,7 +5,6 @@ class ShopsController < ApplicationController
     session[:category_id] = nil
     session[:name] = nil
     @items = Item.page(params[:page]).per(25)
-
   end
   
   def search

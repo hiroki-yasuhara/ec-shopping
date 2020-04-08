@@ -1,4 +1,9 @@
 <h1>商品購入画面</h1>
+  <%if flash[:danger] != nil%>
+  <%= form_with(model: @user_item, local: true)do |f| %>
+    <%= render 'layouts/error_messages', model: f.object%>
+  <% end %>
+  <%end%>
 
 <%=link_to '購入履歴へ',user_items_path, method: :get,class: 'btn btn-light'%>
 <div class="row">
@@ -39,8 +44,7 @@
               <p>価格：<%= item.price %></p>
               <p>説明：<%= item.content %></p>
             </div>
-            <%= form_with(model: current_user.user_items.build, local:true)do |f| %>
-              <%= render 'layouts/error_messages', model: f.object %>
+            <%= form_with(model: @user_items=current_user.user_items.build, local: true)do |f| %>
               <%= hidden_field_tag :item_id, item.id %>
               <%= f.number_field :quantity, min:1,max:10000,step:1 %>
               <%= f.submit '購入', data: { confirm: "購入を確定させますか?" }, class: 'btn-primary btn-block btn-sm' %>

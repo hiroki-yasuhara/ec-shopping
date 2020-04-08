@@ -10,8 +10,10 @@ class UserItemsController < ApplicationController
           ContactMailer.send_when_admin_reply(@user_item).deliver
           redirect_to @user_item
         else
-          flash[:danger] = '商品の購入に失敗しました。'
-          redirect_back(fallback_location: root_path)
+          flash.now[:danger] = '商品の購入に失敗しました。'
+          #redirect_back(fallback_location: root_path)
+          @items =Item.name_like(session[:name]).category_id(session[:category_id]).page(params[:page]).per(25)
+          render 'shops/index'
         end
     end
     
