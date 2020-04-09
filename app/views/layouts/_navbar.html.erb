@@ -8,7 +8,8 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <% if logged_in? %>
-          <a href="#" class="navbar-brand navlogin">ログインユーザ</a>
+          <!--<a href="#" class="navbar-brand navlogin">ログインユーザ</a>-->
+          <h5 class="navbar-brand navlogin">ログインユーザ</h5>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
             <ul class="dropdown-menu dropdown-menu-right">
@@ -19,7 +20,7 @@
             </ul>
           </li>
         <% else %>
-          <li class="nav-item"><%= link_to 'ユーザ登録', signup_path, class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to 'アカウント登録', signup_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
         <% end %>
       </ul>

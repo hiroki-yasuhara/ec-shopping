@@ -19,18 +19,18 @@ height: auto;
     <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
 
     <div class="form-group mt-5">
-      <%= f.label :email, 'Email' %>
+      <%= f.label :email, 'メールアドレス' %>
       <%= f.email_field :email, class: 'form-control' %>
     </div>
     
     <div class="form-group mt-4 mb-5">
-      <%= f.label :password, 'Password' %>
+      <%= f.label :password, 'パスワード' %>
       <%= f.password_field :password, class: 'form-control' %>
     </div>
     
     <%= f.submit 'ログイン', class: 'btn btn-primary btn-block' %>
     <% end %>
     
-    <p class="mt-2"><%= link_to 'ユーザ登録', signup_path %></p>
+    <p class="mt-3">アカウントを持っていませんか？<%= link_to 'アカウント登録', signup_path %></p>
   </div>
 </div>

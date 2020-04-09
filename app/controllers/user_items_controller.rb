@@ -21,7 +21,7 @@ class UserItemsController < ApplicationController
         @user_item = UserItem.find(params[:id])
         @item = @user_item.item
         @user = @item.user
-        @buyer = @user_item.user
+        #@buyer = @user_item.user
     end
     
     def index

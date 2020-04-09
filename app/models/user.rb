@@ -4,6 +4,7 @@ class User < ApplicationRecord
                       format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
                       uniqueness: { case_sensitive: false }
     validates :bank,  presence: true, length: { maximum:20 }
+    validates :account_number,  numericality: { only_integer: true }, length: { maximum: 10 }
     
     has_secure_password
     

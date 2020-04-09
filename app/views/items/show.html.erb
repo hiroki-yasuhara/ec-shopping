@@ -29,7 +29,8 @@
             <td><%= @item.content %></td>
         </tr>
     </table>
-    <%=link_to 'この商品を編集する',edit_item_path(@item),class: 'btn btn-light'%>
+    <%=link_to 'この商品を編集する',edit_item_path(@item),class: 'btn btn-primary'%>
     <%= link_to 'この商品を削除する', @item, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
+    <%= link_to '一覧へ戻る', items_path, class: 'btn btn-light' %>
     </div>
 </div>

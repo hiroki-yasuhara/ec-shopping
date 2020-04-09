@@ -44,10 +44,11 @@
               <p>価格：<%= item.price %></p>
               <p>説明：<%= item.content %></p>
             </div>
+            <p>購入数：</p>
             <%= form_with(model: @user_items=current_user.user_items.build, local: true)do |f| %>
               <%= hidden_field_tag :item_id, item.id %>
               <%= f.number_field :quantity, min:1,max:10000,step:1 %>
-              <%= f.submit '購入', data: { confirm: "購入を確定させますか?" }, class: 'btn-primary btn-block btn-sm' %>
+              <%= f.submit '購入', data: { confirm: "購入を確定させますか?" }, class: 'btn-primary btn-block btn-sm mt-4' %>
             <% end %>
           </li>
         <% end %>
