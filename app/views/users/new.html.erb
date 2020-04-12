@@ -1,10 +1,10 @@
 <%= render 'layouts/error_messages', model: @user %>
-<div class="text-center">
-  <h1>アカウント登録</h1>
+<div class="text-center col-md-9 col-lg-6 offset-lg-3 offset-md-2  mb-3">
+  <h2 class="top_user">アカウント登録</h1>
 </div>
 
-<div class="row">
-  <div class="col-md-6 offset-md-3">
+<div class="row ">
+  <div class="col-md-9 col-lg-6 offset-lg-3 offset-md-2">
   
     <%= form_with(model: @user, local: true) do |f| %>
       

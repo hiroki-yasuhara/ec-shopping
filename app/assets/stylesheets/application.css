@@ -25,4 +25,40 @@ font-style: italic;
 text-shadow: 0px 0px 2px #999,2px 2px 3px #999;
 }
 
+.border_black{
+  /*線の種類（実線） 太さ 色*/
+  border-bottom: double 5px #FFC778;
+}
+
+.midashi {
+  color: #6cb4e4;
+  text-align: center;
+  padding: 0.25em;
+  border-top: solid 2px #6cb4e4;
+  border-bottom: solid 2px #6cb4e4;
+  background: -webkit-repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  background: repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+}
+
+.top_user {
+  background: #dfefff;
+  box-shadow: 0px 0px 0px 5px #dfefff;
+  border: dashed 2px white;
+  padding: 0.2em 0.5em;
+}
+
+.marukakomi {
+  color: #364e96;/*文字色*/
+  border: solid 3px #364e96;/*線色*/
+  padding: 0.3em;/*文字周りの余白*/
+  border-radius: 0.5em;/*角丸*/
+}
+
+.rireki {
+  color: #364e96;/*文字色*/
+  padding: 0.2em 0;/*上下の余白*/
+  border-top: solid 3px #364e96;/*上線*/
+  border-bottom: solid 3px #364e96;/*下線*/
+}
+
 

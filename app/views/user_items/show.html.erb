@@ -1,8 +1,12 @@
-<h1>商品購入結果</h1>
+<h1 class="mb-5">商品購入結果</h1>
 <div class="row">
   <div class="col-sm-12 col-md-4">
     <div class="form-group">
-        <img class="mr-2 rounded" src="<%= @item.image %>" width="200" alt="">
+        <%if @item.image.present? %>
+            <img class="mr-2 rounded" src="<%= @item.image %>" width="200" alt="">
+        <%else%>
+            <img class="mr-2 rounded"> <%= image_tag ('/uploads/tmp/NO_IMAGE.png'), :width =>'200' %></img>
+        <%end%>
     </div>
   </div>
 
@@ -18,12 +22,12 @@
     </tr>
     <tr>
         <th>数量</th>
-        <td><%= @user_item.quantity %></td>
+        <td><%= @user_item.quantity %>円</td>
     </tr>
     <tr>
         <th>合計金額</th>
         <% all = @user_item.quantity.to_i * @user_item.item.price.to_i %>
-        <td><%= all %></td>
+        <td><%= all %>円</td>
     </tr>
     <tr>
         <th>振込先</th>

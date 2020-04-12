@@ -1,8 +1,12 @@
-<h1><%= @item.name %>の商品ページ</h1>
+<h1 class="mb-5"><%= @item.name %>の商品詳細ページ</h1>
 <div class="row">
     <div class="col-sm-12 col-md-4">
         <div class="form-group">
+        <%if @item.image.present? %>
             <img class="mr-2 rounded" src="<%= @item.image %>" width="200" alt="">
+        <%else%>
+          <img class="mr-2 rounded"> <%= image_tag ('/uploads/tmp/NO_IMAGE.png'), :width =>'200' %></img>
+        <%end%>
         </div>
     </div>
 
@@ -23,6 +27,10 @@
         <tr>
             <th>カテゴリ</th>
             <td><%= @item.category.category %></td>
+        </tr>
+        <tr>
+            <th>在庫数</th>
+            <td><%= @item.stock %></td>
         </tr>
         <tr>
             <th>説明</th>

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete 'logout',to: 'sessions#destroy'
   get 'category/:id',to: 'shops#category', as: 'category'
   get 'search', to: 'shops#search'
+  post 'addstock', to: 'items#addstock'
   
   get 'signup', to: 'users#new'
   resources :users, only: [:new, :create]

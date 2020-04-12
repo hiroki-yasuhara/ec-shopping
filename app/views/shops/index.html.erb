@@ -1,13 +1,12 @@
-<h1>商品購入画面</h1>
   <%if flash[:danger] != nil%>
   <%= form_with(model: @user_item, local: true)do |f| %>
     <%= render 'layouts/error_messages', model: f.object%>
   <% end %>
   <%end%>
-
-<%=link_to '購入履歴へ',user_items_path, method: :get,class: 'btn btn-light'%>
+<h1 class="midashi mb-5">商品購入画面</h1>
+<%=link_to '購入履歴へ',user_items_path, method: :get,class: 'btn btn-light '%>
 <div class="row">
-  <div class="col-sm-3 mt-5">
+  <div class="col-md-3 mt-5">
     <table class="table table-bordered">
       <tr>
         <td><%= link_to '全てのカテゴリ' ,category_path(id: 999) %></td>
@@ -19,32 +18,42 @@
       <% end %>
     </table>
   </div>
-  <div class="col-sm-9">
-    <div>
-      <%= form_with(scope: :search, url: search_path, method: :get, local: true) do |f| %>
-        <%= f.label(:name,'商品名検索') %>
-        <%= f.text_field :name,:value =>session[:name] %>
-        <%= f.hidden_field :category_id ,:value =>session[:category_id]%>
-        <%= f.submit('検索') %>
-      <% end %>
-      <h4><span class="badge badge-info">カテゴリ：
+  <div class="col-md-9">
+
+        <%= form_with(scope: :search, url: search_path, method: :get, local: true) do |f| %>
+        <div class="mb-2 form-group form-inline">
+          <label class="mr-2 marukakomi form-control" style="width:97px;">商品名検索</label>
+          <div class="input-group inline-block">
+            <%= f.text_field :name,:value =>session[:name],:size =>"60",class:'form-control',placeholder:'検索ワード' %>
+            <%= f.hidden_field :category_id ,:value =>session[:category_id]%>
+            <div class="input-group-append">
+              <%= f.submit '検索',class: 'btn-light btn-block text-center btn-sm' %>
+            </div>
+          </div>
+        <% end %>
+    </div>
+      <h4 class="mt-3"><span class="badge badge-info p-2">カテゴリ：
       <% if session[:category] %>
         <%= session[:category] %></span></h4>
       <% else%>
         全てのカテゴリ</span></h4>
       <%end%>
-    </div>
+    
     <div class="mt-3">
       <ul class="list-unstyled">
         <% @items.each do |item| %>
           <li class="media mb-3 border-bottom">
-            <img class="mr-2 rounded" src="<%= item.image %>" width="100" alt="">
+            <%if item.image.present? %>
+              <img class="mr-2 rounded" src="<%= item.image %>" width="100" alt="">
+            <%else%>
+              <img class="mr-2 rounded"> <%= image_tag ('/uploads/tmp/NO_IMAGE.png'), :width =>'100' %></img>
+            <%end%>
             <div class="media-body">
-              <p>商品名：<%= item.name %></p>
-              <p>価格：<%= item.price %></p>
-              <p>説明：<%= item.content %></p>
+              <label class="ml-4">商品名：<%= item.name %></label><br>
+              <label class="ml-4">価格：<%= item.price %>円</label><br>
+              <label class="ml-4">説明：<%= item.content %></label>
             </div>
-            <p>購入数：</p>
+            <label class="mr-3 border_black">在庫数：<%= item.stock %></label><p>購入数：</p>
             <%= form_with(model: @user_items=current_user.user_items.build, local: true)do |f| %>
               <%= hidden_field_tag :item_id, item.id %>
               <%= f.number_field :quantity, min:1,max:10000,step:1 %>
@@ -57,5 +66,3 @@
     </div>
   </div>
 </div>
-
-

@@ -1,17 +1,33 @@
-<h1>商品登録画面</h1>
+<h1 class="midashi mb-5">商品登録画面</h1>
 
 <%= link_to '商品を新規登録', new_item_path, class: "btn btn-primary" %>
 
 <div class="mt-3">
 <ul class="list-unstyled">
-  <% @items.each do |f| %>
+  <% @items.each do |item| %>
     <li class="media mb-3  border-bottom">
-      <img class="mr-2 rounded" src="<%= f.image %>" width="100" alt="">
-      <div class="media-body">
-          <p><%= f.name %></p>
-      </div>
+      <%if item.image.present? %>
+        <img class="mr-2 rounded" src="<%= item.image %>" width="100" alt="">
+      <%else%>
+        <img class="mr-2 rounded"> <%= image_tag ('/uploads/tmp/NO_IMAGE.png'), :width =>'100' %></img>
+      <%end%>
+      <div class="media-body row ml-3">
+        <div class="col-md-6 ml-6">
+          <p>商品名：<%= item.name %></p>
+          <p>在庫数：<%= item.stock %></p>
+              <%= form_with(model:item,url:addstock_path, local: true,method: :post)do |f| %>
+              <%= hidden_field_tag :id, item.id %>
+              <div class="input-group mb-3">
+                <%= f.number_field :add_stock, min:-100,max:100,step:1 %>
+                <div class="input-group-append">
+                  <%= f.submit '在庫追加', data: { confirm: "在庫数を追加（又は削減）しますか?"}, class: 'btn-primary btn-block btn-sm mt-4.5' %>
+                </div>
+              </div>
+          </div>
+       </div>
       <div>
-        <%= link_to '商品詳細', f,class: 'btn btn-light' %>
+        <%end%>
+        <%= link_to '商品詳細', item,class: 'btn btn-light' %>
       </div>
     </li>
   <% end %>

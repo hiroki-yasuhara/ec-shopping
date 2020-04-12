@@ -35,21 +35,34 @@ class ItemsController < ApplicationController
       flash[:success] = '商品情報は正常に更新されました'
       redirect_to @item
     else
-      flash.now[:danger] = '商品情報は更新されませんでした'
+      flash.now[:danger] = '商品情報は更新されませんでした。'
       render :edit
+    end
+  end
+  
+  def addstock
+    @item=Item.find(params[:id])
+    @item.increment(:stock, params[:item][:add_stock].to_i)
+    if params[:item][:add_stock].present? && @item.save
+      flash[:success] = '在庫数が更新されました。'
+      redirect_to @item
+    else
+      @items = current_user.items.order(id: :desc).page(params[:page])
+      flash.now[:danger] = '在庫数は更新されませんでした。'
+      render :index
     end
   end
 
   def destroy
     @item.destroy
-    flash[:success] = 'メッセージを削除しました。'
+    flash[:success] = '登録商品を削除しました。'
     redirect_to items_path
   end
   
   private
   
   def items_params
-    params.require(:item).permit(:name,:price,:category_id,:content,:image)
+    params.require(:item).permit(:name,:price,:category_id,:content,:image,:stock)
   end  
   
 

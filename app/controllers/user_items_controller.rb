@@ -1,17 +1,24 @@
 class UserItemsController < ApplicationController
   before_action :require_user_logged_in
     def create
-      item = Item.find(params[:item_id])
-      @user_item = current_user.shop(item)
+      @item = Item.find(params[:item_id])
+      @user_item = current_user.shop(@item)
       @user_item.quantity = params[:user_item][:quantity]
-
-        if @user_item.save
-          flash[:success] = '商品の購入を確定しました。振り込み確認後、商品を発送します。'
-          ContactMailer.send_when_admin_reply(@user_item).deliver
-          redirect_to @user_item
+        if @user_item.quantity.nil? || @item.stock >= @user_item.quantity
+          if @user_item.save
+            @item.decrement(:stock, @user_item.quantity)
+            @item.save
+            flash[:success] = '商品の購入を確定しました。振り込み確認後、商品を発送します。'
+            ContactMailer.send_when_admin_reply(@user_item).deliver
+            NotificationMailer.send_when_user_reply(@user_item).deliver
+            redirect_to @user_item
+          else
+            flash.now[:danger] = '商品の購入に失敗しました。'
+            @items =Item.name_like(session[:name]).category_id(session[:category_id]).page(params[:page]).per(25)
+            render 'shops/index'
+          end
         else
-          flash.now[:danger] = '商品の購入に失敗しました。'
-          #redirect_back(fallback_location: root_path)
+          flash.now[:danger] = '在庫数が不足しています。'
           @items =Item.name_like(session[:name]).category_id(session[:category_id]).page(params[:page]).per(25)
           render 'shops/index'
         end

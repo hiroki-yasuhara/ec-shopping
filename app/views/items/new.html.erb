@@ -1,10 +1,13 @@
 <%= form_with(model: @item, local: true) do |f| %>
 <%= render 'layouts/error_messages', model: f.object %>
 
+<h1 class="mb-5">商品の新規登録ページ</h1>
+
 <div class="row">
   <aside class="col-sm-12 col-md-4">
-    <div class="form-group">
-      <%= f.file_field :image %>
+    <div class="form-group form-inline">
+      <img class="mr-2 rounded"> <%= image_tag ('/uploads/tmp/NO_IMAGE.png'), :width =>'200' %></img>
+      <%= f.file_field :image, class:'mt-3'  %>
     </div>
   </aside>
 
@@ -15,14 +18,23 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :price, '価格' %>
-      <%= f.text_field :price, class: 'form-control' %>
+      <%= f.label :price, '価格(円)' %>
+      <div class="col-sm-4 col-md-4 row">
+        <%= f.text_field :price, class: 'form-control' %>
+      </div>
     </div>
   
     <div class="form-group">
       <%= f.label :category, 'カテゴリー' %>
-      <div>
-        <%= f.collection_select :category_id, Category.all,:id,:category,class: 'form-control' %>
+      <div class="col-sm-3 col-md-3 row">
+        <%= f.collection_select :category_id, Category.all,:id,:category,{include_blank: true},{class: 'form-control'}  %>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :stock, '在庫数' %>
+      <div class="col-sm-2 col-md-2 row">
+        <%= f.number_field :stock, min:1,max:10000,step:1 ,class: 'form-control'%>
       </div>
     </div>
   

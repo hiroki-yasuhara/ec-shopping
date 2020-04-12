@@ -1,11 +1,20 @@
 <%= form_with(model: @item, local: true,method: :put) do |f| %>
 <%= render 'layouts/error_messages', model: f.object %>
+
+<h1 class="mb-5"><%= @item.name %>の商品編集ページ</h1>
+
 <div class="row">
   <aside class="col-sm-12 col-md-4">
-    <div class="form-group">
+   <div class="form-group">
+    <%if @item.image.present? %>
       <img class="mr-2 rounded" src="<%= @item.image %>" width="200" alt="">
-      <%= f.file_field :image %>
+    <%else%>
+      <img class="mr-2 rounded"> <%= image_tag ('/uploads/tmp/NO_IMAGE.png'), :width =>'200' %></img>
+    <%end%>
+    <%= f.file_field :image,class:'mt-3'%>
     </div>
+    
+    
   </aside>
 
   <div class="col-sm-12 col-md-8">
@@ -15,16 +24,19 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :price, '価格' %>
-      <%= f.text_field :price, class: 'form-control' %>
+      <%= f.label :price, '価格(円)' %>
+      <div class="col-sm-4 col-md-4 row">
+        <%= f.text_field :price, class: 'form-control' %>
+      </div>
     </div>
   
     <div class="form-group">
       <%= f.label :category, 'カテゴリー' %>
-      <div>
-        <%= f.collection_select :category_id, Category.all,:id,:category,class: 'form-control' %>
+      <div class="col-sm-3 col-md-3 row">
+        <%= f.collection_select :category_id, Category.all,:id,:category,{include_blank: true},{class: 'form-control'}  %>
       </div>
     </div>
+    
     <div class="form-group">
       <%= f.label :content, '説明' %>
       <%= f.text_area :content, class: 'form-control' %>

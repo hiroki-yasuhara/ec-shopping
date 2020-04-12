@@ -14,7 +14,7 @@ class User < ApplicationRecord
     
     
     def shop(shop_item)
-     self.user_items.create(item_id: shop_item.id)
+     self.user_items.build(item_id: shop_item.id)
 
     end
 end
