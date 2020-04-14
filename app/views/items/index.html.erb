@@ -18,7 +18,7 @@
               <%= form_with(model:item,url:addstock_path, local: true,method: :post)do |f| %>
               <%= hidden_field_tag :id, item.id %>
               <div class="input-group mb-3">
-                <%= f.number_field :add_stock, min:-100,max:100,step:1 %>
+                <%= f.number_field :add_stock, min:-100,max:100,step:1 ,class: 'pl-1'%>
                 <div class="input-group-append">
                   <%= f.submit '在庫追加', data: { confirm: "在庫数を追加（又は削減）しますか?"}, class: 'btn-primary btn-block btn-sm mt-4.5' %>
                 </div>

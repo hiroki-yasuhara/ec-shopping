@@ -4,13 +4,13 @@ class ShopsController < ApplicationController
     session[:category] = nil
     session[:category_id] = nil
     session[:name] = nil
-    @items = Item.page(params[:page]).per(25)
+    @items = Item.order(id: :desc).page(params[:page]).per(10)
   end
   
   def search
     session[:name] = params[:search][:name]
     @search_params = user_search_params
-    @items =Item.search(@search_params).page(params[:page]).per(25)
+    @items =Item.search(@search_params).order(id: :desc).page(params[:page]).per(10)
     render "shops/index"
   end
   
@@ -20,10 +20,10 @@ class ShopsController < ApplicationController
       category = Category.find(params[:id])
       session[:category] = category.category
       session[:category_id] = params[:id]
-      @items =Item.where(category_id: params[:id]).page(params[:page]).per(25)
+      @items =Item.where(category_id: params[:id]).order(id: :desc).page(params[:page]).per(10)
     else
       session[:category] = nil
-      @items = Item.page(params[:page]).per(25)
+      @items = Item.page(params[:page]).per(10)
     end
     render "shops/index"
   end

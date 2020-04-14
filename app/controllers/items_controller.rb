@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :correct_user, only: [:destroy,:edit]
   
   def index
-    @items = current_user.items.order(id: :desc).page(params[:page])
+    @items = current_user.items.order(id: :desc).page(params[:page]).per(10)
   end
 
   def show
@@ -47,7 +47,7 @@ class ItemsController < ApplicationController
       flash[:success] = '在庫数が更新されました。'
       redirect_to @item
     else
-      @items = current_user.items.order(id: :desc).page(params[:page])
+      @items = current_user.items.order(id: :desc).page(params[:page]).per(10)
       flash.now[:danger] = '在庫数は更新されませんでした。'
       render :index
     end

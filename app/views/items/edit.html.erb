@@ -6,15 +6,15 @@
 <div class="row">
   <aside class="col-sm-12 col-md-4">
    <div class="form-group">
+     <img class="mr-2 rounded">
     <%if @item.image.present? %>
-      <img class="mr-2 rounded" src="<%= @item.image %>" width="200" alt="">
+      <%= image_tag @item.image.url , id: :img_prev, :width =>'200' %>
     <%else%>
-      <img class="mr-2 rounded"> <%= image_tag ('/uploads/tmp/NO_IMAGE.png'), :width =>'200' %></img>
-    <%end%>
-    <%= f.file_field :image,class:'mt-3'%>
+      <%= image_tag ('/uploads/tmp/NO_IMAGE.png'), id: :img_prev, :width =>'200' %>
+    <%end%> 
+    </img>
+    <%= f.file_field :image,class:'mt-3' ,id: :botton_img%>
     </div>
-    
-    
   </aside>
 
   <div class="col-sm-12 col-md-8">
@@ -32,7 +32,7 @@
   
     <div class="form-group">
       <%= f.label :category, 'カテゴリー' %>
-      <div class="col-sm-3 col-md-3 row">
+      <div class="col-sm-4 col-md-4 row">
         <%= f.collection_select :category_id, Category.all,:id,:category,{include_blank: true},{class: 'form-control'}  %>
       </div>
     </div>
@@ -47,3 +47,20 @@
   </div>
 </div>
 <% end %>
+
+<script type="text/javascript">
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#botton_img").change(function(){
+        readURL(this);
+    });
+  });
+</script>

@@ -53,12 +53,17 @@
               <label class="ml-4">価格：<%= item.price %>円</label><br>
               <label class="ml-4">説明：<%= item.content %></label>
             </div>
-            <label class="mr-3 border_black">在庫数：<%= item.stock %></label><p>購入数：</p>
+            <div clas="form-group form-inline">
+            <label class="mr-3 border_black">在庫数：<%= item.stock %></label>
+              <div class="input-group-append">
+            <label>購入数：</label>
             <%= form_with(model: @user_items=current_user.user_items.build, local: true)do |f| %>
               <%= hidden_field_tag :item_id, item.id %>
-              <%= f.number_field :quantity, min:1,max:10000,step:1 %>
+              <%= f.number_field :quantity, min:1,max:10000,step:1, class: 'pl-1' %>
               <%= f.submit '購入', data: { confirm: "購入を確定させますか?" }, class: 'btn-primary btn-block btn-sm mt-4' %>
             <% end %>
+              </div>
+            </div>
           </li>
         <% end %>
         <%= paginate @items %>

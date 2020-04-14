@@ -14,12 +14,12 @@ class UserItemsController < ApplicationController
             redirect_to @user_item
           else
             flash.now[:danger] = '商品の購入に失敗しました。'
-            @items =Item.name_like(session[:name]).category_id(session[:category_id]).page(params[:page]).per(25)
+            @items =Item.name_like(session[:name]).category_id(session[:category_id]).order(id: :desc).page(params[:page]).per(10)
             render 'shops/index'
           end
         else
           flash.now[:danger] = '在庫数が不足しています。'
-          @items =Item.name_like(session[:name]).category_id(session[:category_id]).page(params[:page]).per(25)
+          @items =Item.name_like(session[:name]).category_id(session[:category_id]).order(id: :desc).page(params[:page]).per(10)
           render 'shops/index'
         end
     end
@@ -28,12 +28,11 @@ class UserItemsController < ApplicationController
         @user_item = UserItem.find(params[:id])
         @item = @user_item.item
         @user = @item.user
-        #@buyer = @user_item.user
     end
     
     def index
         @user_items1 = current_user.user_items
-        @user_items2 = current_user.user_items.page(params[:page]).per(25)
+        @user_items2 = current_user.user_items.order(id: :desc).page(params[:page]).per(10)
     end
     
     private 
